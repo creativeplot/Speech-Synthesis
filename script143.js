@@ -1,21 +1,22 @@
 
-//
-//
 
-//
+// two functions one to submit  and have the voice speak
+// the other to fill the select box with voices
+
+// variable to get different voices
 const voiceSelect = document.getElementById('voice-select');
 
 const synth = window.speechSynthesis
 
 let voices;
 
-//
+// function to add other voices
 function addVoiceToSelect() {
-    //
+    // synth object has a method called getVoices that will get me the voices
     voices = synth.getVoices();
 
-    //
-    for (let i = 0; i< voices.length; i++) {
+    // looping through the voices and filling the select box with options
+    for (let i = 0; i < voices.length; i++) {
         const option = document.createElement('option');
         option.textContent = `${voices[i].name}`;
 
@@ -47,11 +48,11 @@ function onSubmit(e) {
     synth.speak(utterThis);
 };
 
-//
+// calling the voices
 addVoiceToSelect();
 if (speechSynthesis.onvoiceschanged !== undefined) {
     speechSynthesis.onvoiceschanged = addVoiceToSelect;
 }
 
-//
+// event to speak
 document.getElementById('form').addEventListener('submit', onSubmit);
